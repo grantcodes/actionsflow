@@ -6,6 +6,8 @@ on:
     url: ${{ secrets.REDDIT_UPVOTED_JSON }}
     itemsPath: data.children
     # deduplicationKey: data.id
+    config:
+      limit: 10
 
 jobs:
   # publish:
