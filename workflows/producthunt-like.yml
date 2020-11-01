@@ -4,7 +4,6 @@ on:
   poll:
     url: https://api.producthunt.com/v2/api/graphql
     itemsPath: data.viewer.user.votedPosts.edges
-    deduplicationKey: id
     config:
       limit: 10
       format: |
