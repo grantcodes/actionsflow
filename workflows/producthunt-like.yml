@@ -4,9 +4,12 @@ on:
   poll:
     url: https://api.producthunt.com/v2/api/graphql
     itemsPath: data.viewer.user.votedPosts.edges
-    deduplicationKey: node.id
+    deduplicationKey: id
     config:
       limit: 10
+      format: |
+        item = item.node;
+        return item;
     requestConfig:
       method: POST
       data:
@@ -25,9 +28,9 @@ jobs:
   #         token: ${{ secrets.MICROPUB_TOKEN }}
   #         post: |
   #           {
-  #             "like-of": "${{ on.poll.outputs.node.website }}",
-  #             "summary": "Liked ${{ on.poll.outputs.node.name }} on Product Hunt",
-  #             "syndication": "${{ on.poll.outputs.node.url }}"
+  #             "like-of": "${{ on.poll.outputs.website }}",
+  #             "summary": "Liked ${{ on.poll.outputs.name }} on Product Hunt",
+  #             "syndication": "${{ on.poll.outputs.url }}"
   #           }
   print:
     name: Test Print
@@ -35,6 +38,6 @@ jobs:
     steps:
       - name: Test Print
         env:
-          url: ${{ on.poll.outputs.node.website }}
-          title: ${{ on.poll.outputs.node.name }}
+          url: ${{ on.poll.outputs.website }}
+          title: ${{ on.poll.outputs.name }}
         run: echo Liking $title $url
