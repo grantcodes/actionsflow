@@ -27,3 +27,12 @@ jobs:
   #             "summary": "Liked ${{ on.poll.outputs.node.name }} on Product Hunt",
   #             "syndication": "${{ on.poll.outputs.node.url }}"
   #           }
+  print:
+    name: Test Print
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Print
+        env:
+          url: ${{ on.poll.outputs.node.website }}
+          title: ${{ on.poll.outputs.node.name }}
+        run: echo Liking $title $url

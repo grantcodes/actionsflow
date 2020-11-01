@@ -22,3 +22,12 @@ jobs:
   #             "summary": "Liked ${{ on.poll.outputs.data.title }} on Reddit",
   #             "syndication": "https://reddit.com${{ on.poll.outputs.data.permalink }}"
   #           }
+  print:
+    name: Test Print
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Print
+        env:
+          url: ${{ on.poll.outputs.data.url }}
+          title: ${{ on.poll.outputs.data.title }}
+        run: echo Liking $title $url
