@@ -33,6 +33,7 @@ jobs:
     steps:
       - name: Test Print
         env:
+          id: ${{ on.poll.outputs.id }}
           url: ${{ on.poll.outputs.url }}
           title: ${{ on.poll.outputs.title }}
-        run: echo Liking $title $url
+        run: echo Liking $title $url $id
