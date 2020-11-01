@@ -5,9 +5,12 @@ on:
   poll:
     url: ${{ secrets.REDDIT_UPVOTED_JSON }}
     itemsPath: data.children
-    deduplicationKey: data.permalink
+    deduplicationKey: permalink
     config:
       limit: 10
+      format: |
+        item = item.data;
+        return item;
 
 jobs:
   # publish:
@@ -20,9 +23,9 @@ jobs:
   #         token: ${{ secrets.MICROPUB_TOKEN }}
   #         post: |
   #           {
-  #             "like-of": "${{ on.poll.outputs.data.url }}",
-  #             "summary": "Liked ${{ on.poll.outputs.data.title }} on Reddit",
-  #             "syndication": "https://reddit.com${{ on.poll.outputs.data.permalink }}"
+  #             "like-of": "${{ on.poll.outputs.url }}",
+  #             "summary": "Liked ${{ on.poll.outputs.title }} on Reddit",
+  #             "syndication": "https://reddit.com${{ on.poll.outputs.permalink }}"
   #           }
   print:
     name: Test Print
@@ -30,6 +33,6 @@ jobs:
     steps:
       - name: Test Print
         env:
-          url: ${{ on.poll.outputs.data.url }}
-          title: ${{ on.poll.outputs.data.title }}
+          url: ${{ on.poll.outputs.url }}
+          title: ${{ on.poll.outputs.title }}
         run: echo Liking $title $url
