@@ -18,7 +18,7 @@ jobs:
           token: ${{ secrets.MICROPUB_TOKEN }}
           post: |
             {
-              "like-of": "${{ on.poll.outputs.data.url }}"
-              "summary": "Liked ${{ on.poll.outputs.data.title }} on Reddit"
+              "like-of": "${{ on.poll.outputs.data.url }}",
+              "summary": "Liked ${{ on.poll.outputs.data.title }} on Reddit",
               "syndication": "https://reddit.com${{ on.poll.outputs.data.permalink }}"
             }
