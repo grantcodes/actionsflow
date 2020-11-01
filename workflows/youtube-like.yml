@@ -1,0 +1,47 @@
+# Read YouTube likes and post them to my site.
+# Requires an access token from https://console.cloud.google.com/apis/library/youtube.googleapis.com
+
+on:
+  poll:
+    url: https://www.googleapis.com/youtube/v3/videos
+    itemsPath: items
+    config:
+      limit: 10
+      every: 60
+      format: |
+        const id = item.id
+        item = item.snippet;
+        item.id = id;
+        item.url = 'https://www.youtube.com/watch?v=' + id;
+        return item;
+    requestConfig:
+      method: GET 
+      data:
+        myRating: like
+      headers:
+        Authorization: Bearer ${{ secrets.YOUTUBE_TOKEN }}
+
+jobs:
+  # publish:
+  #   name: "Publish to grant.codes"
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: grantcodes/micropub-action@v1
+  #       with:
+  #         endpoint: ${{ secrets.MICROPUB_ENDPOINT }}
+  #         token: ${{ secrets.MICROPUB_TOKEN }}
+  #         post: |
+  #           {
+  #             "like-of": "${{ on.poll.outputs.url }}",
+  #             "summary": "Liked ${{ on.poll.outputs.title }} on YouTube",
+  #             "syndication": "${{ on.poll.outputs.url }}"
+  #           }
+  print:
+    name: Test Print
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Print
+        env:
+          url: ${{ on.poll.outputs.url }}
+          title: ${{ on.poll.outputs.title }}
+        run: echo Liking $title $url
