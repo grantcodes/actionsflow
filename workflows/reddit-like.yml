@@ -8,17 +8,17 @@ on:
     deduplicationKey: data.id
 
 jobs:
-  publish:
-    name: "Publish to grant.codes"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: grantcodes/micropub-action@v1
-        with:
-          endpoint: ${{ secrets.MICROPUB_ENDPOINT }}
-          token: ${{ secrets.MICROPUB_TOKEN }}
-          post: |
-            {
-              "like-of": "${{ on.poll.outputs.data.url }}",
-              "summary": "Liked ${{ on.poll.outputs.data.title }} on Reddit",
-              "syndication": "https://reddit.com${{ on.poll.outputs.data.permalink }}"
-            }
+  # publish:
+  #   name: "Publish to grant.codes"
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: grantcodes/micropub-action@v1
+  #       with:
+  #         endpoint: ${{ secrets.MICROPUB_ENDPOINT }}
+  #         token: ${{ secrets.MICROPUB_TOKEN }}
+  #         post: |
+  #           {
+  #             "like-of": "${{ on.poll.outputs.data.url }}",
+  #             "summary": "Liked ${{ on.poll.outputs.data.title }} on Reddit",
+  #             "syndication": "https://reddit.com${{ on.poll.outputs.data.permalink }}"
+  #           }

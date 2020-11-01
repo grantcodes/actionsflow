@@ -13,17 +13,17 @@ on:
         Authorization: Bearer ${{ secrets.PRODUCTHUNT_TOKEN }}
 
 jobs:
-  publish:
-    name: "Publish to grant.codes"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: grantcodes/micropub-action@v1
-        with:
-          endpoint: ${{ secrets.MICROPUB_ENDPOINT }}
-          token: ${{ secrets.MICROPUB_TOKEN }}
-          post: |
-            {
-              "like-of": "${{ on.poll.outputs.node.website }}",
-              "summary": "Liked ${{ on.poll.outputs.node.name }} on Product Hunt",
-              "syndication": "${{ on.poll.outputs.node.url }}"
-            }
+  # publish:
+  #   name: "Publish to grant.codes"
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: grantcodes/micropub-action@v1
+  #       with:
+  #         endpoint: ${{ secrets.MICROPUB_ENDPOINT }}
+  #         token: ${{ secrets.MICROPUB_TOKEN }}
+  #         post: |
+  #           {
+  #             "like-of": "${{ on.poll.outputs.node.website }}",
+  #             "summary": "Liked ${{ on.poll.outputs.node.name }} on Product Hunt",
+  #             "syndication": "${{ on.poll.outputs.node.url }}"
+  #           }
