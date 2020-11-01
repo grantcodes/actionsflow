@@ -7,6 +7,7 @@ on:
     itemsPath: data.children
     config:
       limit: 10
+      every: 60
       format: |
         item = item.data;
         return item;
