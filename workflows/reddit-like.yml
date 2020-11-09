@@ -5,7 +5,7 @@ on:
   poll:
     url: ${{ secrets.REDDIT_UPVOTED_JSON }}
     itemsPath: data.children
-    deduplicationKey: data.id
+    deduplicationKey: id
     config:
       limit: 10
       # every: 60

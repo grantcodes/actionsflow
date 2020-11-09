@@ -18,20 +18,20 @@ on:
         Authorization: Bearer ${{ secrets.PRODUCTHUNT_TOKEN }}
 
 jobs:
-  # publish:
-  #   name: "Publish to grant.codes"
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: grantcodes/micropub-action@v1
-  #       with:
-  #         endpoint: ${{ secrets.MICROPUB_ENDPOINT }}
-  #         token: ${{ secrets.MICROPUB_TOKEN }}
-  #         post: |
-  #           {
-  #             "like-of": "${{ on.poll.outputs.website }}",
-  #             "summary": "Liked ${{ on.poll.outputs.name }} on Product Hunt",
-  #             "syndication": "${{ on.poll.outputs.url }}"
-  #           }
+  publish:
+    name: "Publish to grant.codes"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: grantcodes/micropub-action@v1
+        with:
+          endpoint: ${{ secrets.MICROPUB_ENDPOINT }}
+          token: ${{ secrets.MICROPUB_TOKEN }}
+          post: |
+            {
+              "like-of": "${{ on.poll.outputs.website }}",
+              "summary": "Liked ${{ on.poll.outputs.name }} on Product Hunt",
+              "syndication": "${{ on.poll.outputs.url }}"
+            }
   print:
     name: Test Print
     runs-on: ubuntu-latest
