@@ -5,12 +5,13 @@ on:
   poll:
     url: ${{ secrets.REDDIT_UPVOTED_JSON }}
     itemsPath: data.children
-    deduplicationKey: id
+    deduplicationKey: fakeId
     config:
       limit: 10
       # every: 60
       format: |
         item = item.data;
+        item.fakeId = 10;
         return item;
 
 jobs:
