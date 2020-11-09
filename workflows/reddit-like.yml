@@ -7,7 +7,10 @@ on:
     itemsPath: data.children
     deduplicationKey: fakeId
     config:
+      debug: true
       limit: 10
+      shouldDeduplicate: true
+      skipFirst: true
       # every: 60
       format: |
         item = item.data;
