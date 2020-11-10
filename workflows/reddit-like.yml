@@ -9,25 +9,25 @@ on:
       debug: true
       limit: 10
       skipFirst: true
-      # every: 60
+      every: 60
       format: |
         item = item.data;
         return item;
 jobs:
-  # publish:
-  #   name: "Publish to grant.codes"
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: grantcodes/micropub-action@v1
-  #       with:
-  #         endpoint: ${{ secrets.MICROPUB_ENDPOINT }}
-  #         token: ${{ secrets.MICROPUB_TOKEN }}
-  #         post: |
-  #           {
-  #             "like-of": "${{ on.poll.outputs.url }}",
-  #             "summary": "Liked ${{ on.poll.outputs.title }} on Reddit",
-  #             "syndication": "https://reddit.com${{ on.poll.outputs.permalink }}"
-  #           }
+  publish:
+    name: "Publish to grant.codes"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: grantcodes/micropub-action@v1
+        with:
+          endpoint: ${{ secrets.MICROPUB_ENDPOINT }}
+          token: ${{ secrets.MICROPUB_TOKEN }}
+          post: |
+            {
+              "like-of": "${{ on.poll.outputs.url }}",
+              "summary": "Liked ${{ on.poll.outputs.title }} on Reddit",
+              "syndication": "https://reddit.com${{ on.poll.outputs.permalink }}"
+            }
   print:
     name: Test Print
     runs-on: ubuntu-latest
