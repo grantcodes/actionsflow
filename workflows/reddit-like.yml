@@ -3,12 +3,17 @@
 
 on:
   rss:
-    url: ${{ secrets.REDDIT_UPVOTED_RSS }}
+    poll:
+      url: ${{ secrets.REDDIT_UPVOTED_JSON }}
+      itemsPath: data.children
     config:
       debug: true
       limit: 10
       skipFirst: true
       # every: 60
+      format: |
+        item = item.data;
+        return item;
 jobs:
   # publish:
   #   name: "Publish to grant.codes"
@@ -30,8 +35,7 @@ jobs:
     steps:
       - name: Test Print
         env:
+          id: ${{ on.poll.outputs.id }}
+          url: ${{ on.poll.outputs.url }}
           title: ${{ on.poll.outputs.title }}
-          url: ${{ on.poll.outputs.link }}
-          content: ${{ on.poll.outputs.content }}
-          contentSnippet: ${{ on.poll.outputs.contentSnippet }}
-        run: echo Liking $title $url $content $contentSnippet
+        run: echo Liking $title $url $id
